@@ -47,8 +47,28 @@ const controllers = {
         }
     },
     update: (req, res) => {
-        // const {id} = req.params
-        // const found = companies.data.filter(company => company.id === parseInt(id))
+        // console.log(req.body)
+        // const identifier = req.params.id
+        // const newCompanies = companies.data.filter(company => company.id != identifier)
+        // let found = companies.data.filter(company => company.id == identifier)
+
+        // found[0]['name'] = req.body.name
+        // console.log(found)
+        // let newObject = found[0]
+        // newObject = Object.assign(newObject, req.body)
+        // console.log(newObject)
+        
+        // const {id, name} = req.body
+        // if(typeof id !== 'undefined') {
+        //     found[0].name = name
+        // }
+
+        // if(typeof name !== 'undefined') {
+        //     found[0].id = id
+        // }
+
+        // var newCompaniesUpdated = [...newCompanies, found[0]]
+        // console.log(newCompaniesUpdated)
         // res.status(200).json({data: found})   
     }
 }
