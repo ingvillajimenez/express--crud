@@ -41,7 +41,7 @@ const controllers = {
                 if (err) throw err;
                 console.log('The file has been saved!')
             })
-            res.status(204).json({data: newCompanies});
+            res.status(200).json({data: newCompanies});
         }else {
             res.status(404).json({message: 'Company not found'});
         }
