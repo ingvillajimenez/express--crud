@@ -31,7 +31,7 @@ const controllers = {
     },
     delete: (req, res) => {
         const {id} = req.params
-        const isHere = companies.data.some(company => company.id == id)
+        const isHere = companies.data.some(company => company.id == id);
 
         if(isHere) {
             var newCompanies = companies.data.filter(company => company.id != id);
@@ -41,35 +41,28 @@ const controllers = {
                 if (err) throw err;
                 console.log('The file has been saved!')
             })
-            res.json({data: newCompanies});
+            res.status(204).json({data: newCompanies});
         }else {
-            res.status(204).json({message: 'Company not found'});
+            res.status(404).json({message: 'Company not found'});
         }
     },
     update: (req, res) => {
-        // console.log(req.body)
-        // const identifier = req.params.id
-        // const newCompanies = companies.data.filter(company => company.id != identifier)
-        // let found = companies.data.filter(company => company.id == identifier)
+        const {id} = req.params;
+        const companyInformation = req.body;
+        const isHere = companies.data.some(company => company.id == id);
 
-        // found[0]['name'] = req.body.name
-        // console.log(found)
-        // let newObject = found[0]
-        // newObject = Object.assign(newObject, req.body)
-        // console.log(newObject)
-        
-        // const {id, name} = req.body
-        // if(typeof id !== 'undefined') {
-        //     found[0].name = name
-        // }
+        if(isHere) {
+            const updatedCompanies = companies.data.map(company => (company.id == id)?companyInformation:company);
+            const companiesToWrite = JSON.stringify({data: updatedCompanies});
 
-        // if(typeof name !== 'undefined') {
-        //     found[0].id = id
-        // }
-
-        // var newCompaniesUpdated = [...newCompanies, found[0]]
-        // console.log(newCompaniesUpdated)
-        // res.status(200).json({data: found})   
+            fs.writeFile('./data.json', companiesToWrite, (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!')
+            })
+            res.status(200).json({data: updatedCompanies});
+        } else {
+            res.status(404).json({message: 'Company not found'});
+        }
     }
 }
 
